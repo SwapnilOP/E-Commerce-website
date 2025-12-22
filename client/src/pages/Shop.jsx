@@ -1,5 +1,5 @@
 import React from 'react'
-import NavBar from '../components/User/NavBar'
+import NavBar from '../components/user/NavBar';
 import ProductGrid from '../components/user/ProductGrid'
 const Shop = () => {
   return (

@@ -1,28 +1,37 @@
 import React from "react";
-import NavBar from "../components/User/NavBar";
+import NavBar from "../components/user/NavBar";
 import Banner from "../components/user/Banner";
 import ProductGrid from "../components/user/ProductGrid";
 import Footer from "../components/user/Footer";
+
 const HomePage = () => {
   return (
-    <div className="bg-purple-50 min-h-screen overflow-x-hidden">
+    <div className="bg-gray-50 min-h-screen overflow-x-hidden">
       {/* Header */}
-      <header>
-        <NavBar />
+      <header className="sticky top-0 z-50">
+        <NavBar/>
       </header>
 
       {/* Main Content */}
-      <main>
-        {/* Promotional Banner */}
-        <Banner/>
+      <main className="pt-2">
 
-        {/* products grid */}
-        <ProductGrid limit={8}/>
+        {/* Hero Banner */}
+        <section className="w-full">
+          <Banner/>
+        </section>
+
+        {/* Product Grid Section */}
+        <section className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-gray-800 mb-6">
+            Featured Products
+          </h2>
+          <ProductGrid limit={8} />
+        </section>
       </main>
 
-      {/* footer */}
-      <footer>
-         <Footer/>
+      {/* Footer */}
+      <footer className="mt-8">
+        <Footer />
       </footer>
     </div>
   );

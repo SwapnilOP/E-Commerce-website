@@ -82,8 +82,8 @@ const ProductGrid = ({ limit }) => {
             className="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group relative"
           >
             {/* Wishlist Icon */}
-            <button className="absolute top-3 right-3 text-gray-600 border rounded-full p-2 bg-amber-50 hover:text-pink-600 transition">
-              <FaHeart className="text-lg" />
+            <button className="absolute top-3 right-3 z-20 text-gray-600 border rounded-full p-2 bg-amber-50 hover:text-pink-600 transition">
+              <FaHeart className="text-lg"/>
             </button>
 
             {/* Image */}
