@@ -1,10 +1,30 @@
-import React from "react";
+import { useState,useEffect } from "react";
 import NavBar from "../components/user/NavBar";
 import Banner from "../components/user/Banner";
 import ProductGrid from "../components/user/ProductGrid";
 import Footer from "../components/user/Footer";
 
 const HomePage = () => {
+  const [products,setProducts] = useState([]);
+  const [totalPages,setTotalPages] = useState(1);
+  useEffect(() => {
+     const fetchProducts = async()=>{
+        try{
+           const res = await fetch("http://localhost:5000/api/products/getProducts?page=1&limit=8");
+           if(!res.ok){
+               throw new Error("failed to fetch products");
+           }
+           const data = await res.json();
+           setProducts(data.products);
+           setTotalPages(data.totalPages);
+        }
+        catch(error){
+           console.error(error);
+        }
+     }
+      fetchProducts();
+  }, [])
+  
   return (
     <div className="bg-gray-50 min-h-screen overflow-x-hidden">
       {/* Header */}
@@ -25,7 +45,7 @@ const HomePage = () => {
           <h2 className="text-2xl sm:text-3xl font-semibold text-gray-800 mb-6">
             Featured Products
           </h2>
-          <ProductGrid limit={8} />
+          <ProductGrid products={products}/>
         </section>
       </main>
 

@@ -1,11 +1,11 @@
 import User from "../models/User.js";
 import bcrypt from "bcryptjs";
+import generateToken from "../utils/generateToken.js";
 
-// login
+// login 
 export const userLogin = async (req, res) => {
   try {
     const { email, password } = req.body;
-
 
     const user = await User.findOne({ email }).select("+password");
 
@@ -21,6 +21,7 @@ export const userLogin = async (req, res) => {
 
     res.status(200).json({
       message: "Login successful",
+      token:generateToken(user._id),
       user: {
         id: user._id,
         name: user.name,
@@ -51,9 +52,10 @@ export const userSignup = async (req, res) => {
       password:hashedPassword,
     });
 
-    res.send(201).json(
+    res.status(201).json(
       {
         message:"User registered successfully",
+        token: generateToken(user._id),
         user:{
           id:user._id,
           name:user.name,
