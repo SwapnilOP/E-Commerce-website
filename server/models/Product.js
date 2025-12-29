@@ -7,15 +7,20 @@ const productSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    slug: {
+      type: String,
+      unique: true,
+    },
     description: {
       type: String,
       required: true,
       trim: true,
     },
-    image: {
-      type: String,
-      required: true,
-    },
+    images: [
+      {
+        type: String,
+      }, 
+    ],
     price: {
       type: Number,
       required: true,
@@ -27,6 +32,22 @@ const productSchema = new mongoose.Schema(
     category: {
       type: String,
       required: true,
+    },
+    brand: {
+      type: String,
+      required: true,
+    },
+    rating: {
+      type: Number,
+      default: 0,
+    },
+    numReviews: {
+      type: Number,
+      default: 0,
+    },
+    isActive: {
+      type: Boolean,
+      default: true,
     },
   },
   { timestamps: true }

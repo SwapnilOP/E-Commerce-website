@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import NavBar from "../components/user/NavBar";
 import ProductGrid from "../components/user/ProductGrid";
 
 const PRODUCTS_PER_PAGE = 30;
 
-const Shop = () => {
+const SearchResults = () => {
+  const [searchParams] = useSearchParams();
+  const keyword = searchParams.get("keyword");
+
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -16,7 +20,7 @@ const Shop = () => {
         setLoading(true);
 
         const res = await fetch(
-          `http://localhost:5000/api/products/getProducts?page=${currentPage}&limit=${PRODUCTS_PER_PAGE}`
+          `http://localhost:5000/api/products/search?page=${currentPage}&limit=${PRODUCTS_PER_PAGE}&keyword=${keyword}`
         );
 
         if (!res.ok) throw new Error("Failed to fetch products");
@@ -34,7 +38,7 @@ const Shop = () => {
     };
 
     fetchProducts();
-  }, [currentPage]);
+  }, [currentPage,keyword]);
 
   return (
     <div>
@@ -82,4 +86,4 @@ const Shop = () => {
   );
 };
 
-export default Shop;
+export default SearchResults;

@@ -1,10 +1,25 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate} from "react-router-dom";
 import { FaSearch, FaShoppingCart, FaBars, FaTimes } from "react-icons/fa";
 
 const NavBar = () => {
+ 
   const [menuOpen, setMenuOpen] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
+  const [inputVal, setInputVal] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleInputChange = (e) => {
+    setInputVal(e.target.value);
+  };
+
+  const handleEnterKey = (e) => {
+     if(e.key==='Enter'){
+        console.log("enter key pressed");
+        navigate(`/search-result?keyword=${inputVal}`);
+     }
+  }
 
   return (
     <nav className="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50">
@@ -29,7 +44,10 @@ const NavBar = () => {
           <input
             type="text"
             placeholder="Search products..."
+            value={inputVal}
             className="w-full bg-transparent outline-none text-gray-700"
+            onChange={handleInputChange}
+            onKeyDown={handleEnterKey}
           />
         </div>
 
@@ -67,6 +85,9 @@ const NavBar = () => {
             type="text"
             placeholder="Search products..."
             className="w-full bg-transparent outline-none text-gray-700"
+            value={inputVal}
+            onChange={handleInputChange}
+            onKeyDown={handleEnterKey}
           />
         </div>
       )}
