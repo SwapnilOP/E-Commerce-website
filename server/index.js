@@ -5,6 +5,7 @@ import cors from "cors";
 
 import productRoutes from "./routes/productRoutes.js";
 import AuthRoutes from "./routes/authRoutes.js";
+import bannerRoutes from "./routes/bannerRoutes.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -16,6 +17,7 @@ app.use(express.json());
 
 app.use("/api/auth",AuthRoutes);
 app.use("/api/products",productRoutes);
+app.use("/api/banner",bannerRoutes);
 
 app.get("/",(req,res)=>{
     res.send("app is running");
