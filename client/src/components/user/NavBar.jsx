@@ -3,7 +3,7 @@ import { Link,useNavigate} from "react-router-dom";
 import { FaSearch, FaShoppingCart, FaBars, FaTimes } from "react-icons/fa";
 
 const NavBar = () => {
- 
+  const token = localStorage.getItem("token");
   const [menuOpen, setMenuOpen] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [inputVal, setInputVal] = useState("");
@@ -36,6 +36,20 @@ const NavBar = () => {
           <li><Link to="/shop" className="hover:text-indigo-600 transition">Shop</Link></li>
           <li><Link to="/about" className="hover:text-indigo-600 transition">About</Link></li>
           <li><Link to="/contact" className="hover:text-indigo-600 transition">Contact</Link></li>
+          {!token && (
+            <li><Link to="/login" className="hover:text-indigo-600 transition">Login</Link></li>
+          )}
+          {token && (
+              <button 
+                 className=" px-2 py-0.5 border rounded-lg hover:bg-gray-200"
+                 onClick={()=>{
+                    localStorage.removeItem("token");
+                    navigate("/");
+                 }}
+              >
+                logout
+              </button>
+          )}
         </ul>
 
         {/* Search Bar (desktop/tablet) */}
@@ -99,6 +113,20 @@ const NavBar = () => {
           <Link to="/shop" className="block hover:text-indigo-600 transition">Shop</Link>
           <Link to="/about" className="block hover:text-indigo-600 transition">About</Link>
           <Link to="/contact" className="block hover:text-indigo-600 transition">Contact</Link>
+          {!token && (
+            <Link to="/login" className="hover:text-indigo-600 transition">Login</Link>
+          )}
+          {token && (
+              <button 
+                 className=" px-2 py-0.5 border rounded-lg hover:bg-gray-200"
+                 onClick={()=>{
+                    localStorage.removeItem("token");
+                    navigate("/");
+                 }}
+              >
+                logout
+              </button>
+          )}
         </div>
       )}
     </nav>

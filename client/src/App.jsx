@@ -6,6 +6,8 @@ import AboutPage from "./pages/AboutPage"
 import Contact from "./pages/Contact"
 import ProductDetails from "./pages/productDetails"
 import SearchResults from "./pages/SearchResults"
+import LoginPage from "./pages/LoginPage"
+import RegistrationPage from "./pages/RegistrationPage"
 
 function App() {
   return (
@@ -19,6 +21,9 @@ function App() {
           <Route path="/contact" element={<Contact/>}/>
           <Route path="/product/:id" element={<ProductDetails/>} /> 
           <Route path="/search-result" element={<SearchResults/>}/>
+          <Route path="/login" element={<LoginPage/>}/>
+          <Route path="/signup" element={<RegistrationPage/>}/>
+
         </Routes>
       </BrowserRouter>
     </>

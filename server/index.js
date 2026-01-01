@@ -6,6 +6,8 @@ import cors from "cors";
 import productRoutes from "./routes/productRoutes.js";
 import AuthRoutes from "./routes/authRoutes.js";
 import bannerRoutes from "./routes/bannerRoutes.js";
+import cartRoutes from "./routes/cartRoutes.js";
+import wishlistRoutes from "./routes/wishlistRoutes.js"
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -18,8 +20,10 @@ app.use(express.json());
 app.use("/api/auth",AuthRoutes);
 app.use("/api/products",productRoutes);
 app.use("/api/banner",bannerRoutes);
+app.use("/api/cart",cartRoutes);
+app.use("/api/wishlist", wishlistRoutes);
 
-app.get("/",(req,res)=>{
+app.get("/",(req,res)=>{ 
     res.send("app is running");
    console.log("get request");        
 });
