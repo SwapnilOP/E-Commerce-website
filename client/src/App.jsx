@@ -8,6 +8,7 @@ import ProductDetails from "./pages/productDetails"
 import SearchResults from "./pages/SearchResults"
 import LoginPage from "./pages/LoginPage"
 import RegistrationPage from "./pages/RegistrationPage"
+import Cart from "./pages/Cart"
 
 function App() {
   return (
@@ -23,7 +24,8 @@ function App() {
           <Route path="/search-result" element={<SearchResults/>}/>
           <Route path="/login" element={<LoginPage/>}/>
           <Route path="/signup" element={<RegistrationPage/>}/>
-
+          <Route path="/cart" element={<Cart/>}/>
+          
         </Routes>
       </BrowserRouter>
     </>

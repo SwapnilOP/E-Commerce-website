@@ -50,7 +50,7 @@ const ProductDetails = () => {
       try {
         // ---- GET CART ----
         const cartRes = await fetch(
-          "http://localhost:5000/api/cart/getCart",
+          "http://localhost:5000/api/cart/cart-items-list",
           {
             headers: {
               Authorization: `Bearer ${token}`
@@ -67,7 +67,7 @@ const ProductDetails = () => {
 
         // ---- GET WISHLIST ----
         const wishRes = await fetch(
-          "http://localhost:5000/api/wishlist/getWishlist",
+          "http://localhost:5000/api/wishlist/get-wishlist-list",
           {
             headers: {
               Authorization: `Bearer ${token}`

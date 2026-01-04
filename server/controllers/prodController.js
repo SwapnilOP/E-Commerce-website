@@ -45,7 +45,7 @@ export const fetchDetails = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
+ 
 export const searchProducts = async (req, res) => {
   try {
     const page = Number(req.query.page) || 1;
@@ -81,4 +81,5 @@ export const searchProducts = async (req, res) => {
     console.log(err);
   }
 }
+
 

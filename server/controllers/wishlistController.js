@@ -9,15 +9,7 @@ export const add = async (req, res) => {
       return res.status(400).json({ message: "Product ID is required" });
     }
 
-    // get token
-    const token = req.headers.authorization?.split(" ")[1];
-    if (!token) {
-      return res.status(401).json({ message: "No token provided" });
-    }
-
-    // verify token
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const userId = decoded.id;
+    const userId = req.user.id;
 
     // add product to wishlist (no duplicates)
     const wishlist = await WishList.findOneAndUpdate(
@@ -45,15 +37,7 @@ export const remove = async (req, res) => {
       return res.status(400).json({ message: "Product ID is required" });
     }
 
-    // get token
-    const token = req.headers.authorization?.split(" ")[1];
-    if (!token) {
-      return res.status(401).json({ message: "No token provided" });
-    }
-
-    // verify token
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const userId = decoded.id;
+    const userId = req.user.id;
 
     // remove product from wishlist
     const wishlist = await WishList.findOneAndUpdate(
@@ -77,17 +61,9 @@ export const remove = async (req, res) => {
   }
 };
 
-export const getWishlistItems = async (req, res) => {
+export const getWishlistList = async (req, res) => {
   try {
-    // get token
-    const token = req.headers.authorization?.split(" ")[1];
-    if (!token) {
-      return res.status(401).json({ message: "No token provided" });
-    }
-
-    // verify token
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const userId = decoded.id;
+    const userId = req.user.id;
 
     // find wishlist
     const wishlist = await WishList.findOne({ userId });

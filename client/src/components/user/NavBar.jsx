@@ -37,11 +37,11 @@ const NavBar = () => {
           <li><Link to="/about" className="hover:text-indigo-600 transition">About</Link></li>
           <li><Link to="/contact" className="hover:text-indigo-600 transition">Contact</Link></li>
           {!token && (
-            <li><Link to="/login" className="hover:text-indigo-600 transition">Login</Link></li>
+            <li><Link to="/login" className="hover:text-indigo-600 transition ">Login</Link></li>
           )}
           {token && (
               <button 
-                 className=" px-2 py-0.5 border rounded-lg hover:bg-gray-200"
+                 className=" px-2 py-0.5 border rounded-lg hover:bg-gray-200 cursor-pointer"
                  onClick={()=>{
                     localStorage.removeItem("token");
                     navigate("/");
@@ -77,9 +77,20 @@ const NavBar = () => {
           </button>
 
           {/* Cart */}
-          <button className="text-gray-700 text-2xl relative hover:text-indigo-600 transition">
+
+            <button 
+               className="text-gray-700 text-2xl relative hover:text-indigo-600 transition cursor-pointer"
+               onClick={()=>{
+                  const token = localStorage.getItem("token");
+                  if(!token){
+                     navigate("/login");
+                  }else{
+                     navigate("/cart");
+                  }
+               }}
+            >
             <FaShoppingCart />
-          </button>
+            </button>
 
           {/* Mobile Menu Button */}
           <button
@@ -114,7 +125,7 @@ const NavBar = () => {
           <Link to="/about" className="block hover:text-indigo-600 transition">About</Link>
           <Link to="/contact" className="block hover:text-indigo-600 transition">Contact</Link>
           {!token && (
-            <Link to="/login" className="hover:text-indigo-600 transition">Login</Link>
+            <Link to="/login" className="hover:text-indigo-600 transition cursor-pointer">Login</Link>
           )}
           {token && (
               <button 
