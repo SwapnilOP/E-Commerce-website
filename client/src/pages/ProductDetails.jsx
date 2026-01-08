@@ -198,7 +198,7 @@ const ProductDetails = () => {
               <button
                 onClick={handleCartToggle}
                 disabled={cartLoading}
-                className={`flex-1 py-3 rounded-lg font-semibold transition
+                className={`flex-1 py-3 rounded-lg font-semibold transition cursor-pointer
                   ${isInCart
                     ? "bg-green-600 text-white"
                     : "bg-purple-700 text-white"}
@@ -215,7 +215,7 @@ const ProductDetails = () => {
               <button
                 onClick={handleWishlistToggle}
                 disabled={wishlistLoading}
-                className={`flex-1 py-3 rounded-lg font-semibold transition border-2
+                className={`flex-1 py-3 rounded-lg font-semibold transition border-2 cursor-pointer
                   ${isWishlisted
                     ? "border-red-600 text-red-600"
                     : "border-purple-700 text-purple-700"}

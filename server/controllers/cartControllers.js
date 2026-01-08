@@ -156,34 +156,52 @@ export const updateQuantity = async (req, res) => {
     const { operation } = req.query;
     const userId = req.user.id;
 
-    const updatedCart = await Cart.findOneAndUpdate(
+    if (!["add", "subtract", "delete"].includes(operation)) {
+      return res.status(400).json({ message: "Invalid operation" });
+    }
+
+    // 🗑️ DELETE → remove product completely
+    if (operation === "delete") {
+      const cart = await Cart.findOneAndUpdate(
+        { userId },
+        { $pull: { items: { productId } } },
+        { new: true }
+      );
+
+      return res.status(200).json(cart || { items: [] });
+    }
+
+    // ➕➖ ADD / SUBTRACT
+    const cart = await Cart.findOneAndUpdate(
       { userId, "items.productId": productId },
       { $inc: { "items.$.quantity": operation === "add" ? 1 : -1 } },
       { new: true }
     );
 
-    if (!updatedCart) {
+    if (!cart) {
       return res.status(404).json({ message: "Item not found in cart" });
     }
 
-    // Did the quantity drop to 0 or less?
-    const updatedItem = updatedCart.items.find(item => item.productId.toString() === productId);
-    
-    if (updatedItem && updatedItem.quantity <= 0) {
-      // remove the item if quantity is 0
-      const cartAfterRemoval = await Cart.findOneAndUpdate(
+    // 🚮 If quantity drops to 0 → remove item
+    const item = cart.items.find(
+      i => i.productId.toString() === productId
+    );
+
+    if (item && item.quantity <= 0) {
+      const cleanedCart = await Cart.findOneAndUpdate(
         { userId },
-        { $pull: { items: { productId: productId } } },
+        { $pull: { items: { productId } } },
         { new: true }
       );
-      return res.status(200).json(cartAfterRemoval);
+
+      return res.status(200).json(cleanedCart);
     }
 
-    // 3.updated 
-    res.status(200).json(updatedCart);
+    // ✅ Normal update
+    res.status(200).json(cart);
 
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: "Server Error" });
+    res.status(500).json({ message: "Server error" });
   }
 };

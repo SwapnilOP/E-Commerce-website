@@ -9,6 +9,7 @@ import SearchResults from "./pages/SearchResults"
 import LoginPage from "./pages/LoginPage"
 import RegistrationPage from "./pages/RegistrationPage"
 import Cart from "./pages/Cart"
+import CheckOut from "./pages/CheckOut"
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/login" element={<LoginPage/>}/>
           <Route path="/signup" element={<RegistrationPage/>}/>
           <Route path="/cart" element={<Cart/>}/>
+          <Route path="/checkout" element={<CheckOut/>}/>
           
         </Routes>
       </BrowserRouter>
