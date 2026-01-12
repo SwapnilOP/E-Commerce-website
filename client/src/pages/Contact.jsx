@@ -3,85 +3,60 @@ import NavBar from "../components/user/NavBar";
 
 const Contact = () => {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-purple-100">
       <NavBar />
 
       {/* Header */}
-      <section className="bg-gradient-to-r from-purple-600 to-purple-400 text-white py-20 text-center">
-        <h1 className="text-4xl font-bold">Contact Us</h1>
-        <p className="mt-4 text-purple-100">
-          Have questions? We’re here to help you.
+      <section className="relative bg-gradient-to-r from-purple-700 to-purple-500 text-white py-24 text-center">
+        <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_top,white,transparent_70%)]"></div>
+
+        <h1 className="relative text-4xl md:text-5xl font-extrabold tracking-tight">
+          Contact Us
+        </h1>
+        <p className="relative mt-4 text-purple-100 max-w-xl mx-auto">
+          Need help or have a question? Reach out anytime.
         </p>
       </section>
 
-      {/* Contact Content */}
-      <section className="max-w-6xl mx-auto px-6 py-16 grid gap-12 md:grid-cols-2">
-        {/* Contact Info */}
-        <div>
-          <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-            Get in Touch
-          </h2>
-
-          <div className="space-y-4">
-            <div className="p-5 bg-white rounded-xl shadow-sm border border-purple-100">
-              <p className="font-semibold text-purple-700">📧 Email</p>
-              <p className="text-gray-600">support@shopease.com</p>
-            </div>
-
-            <div className="p-5 bg-white rounded-xl shadow-sm border border-purple-100">
-              <p className="font-semibold text-purple-700">📞 Phone</p>
-              <p className="text-gray-600">+91 98765 43210</p>
-            </div>
-
-            <div className="p-5 bg-white rounded-xl shadow-sm border border-purple-100">
-              <p className="font-semibold text-purple-700">📍 Location</p>
-              <p className="text-gray-600">India</p>
-            </div>
+      {/* Content */}
+      <section className="max-w-5xl mx-auto px-6 py-20">
+        <div className="grid gap-10 md:grid-cols-3">
+          
+          {/* Email */}
+          <div className="group bg-white/80 backdrop-blur rounded-2xl p-8 shadow-md border border-purple-100 hover:shadow-xl transition">
+            <div className="text-4xl mb-4"></div>
+            <h3 className="text-xl font-semibold text-gray-800 mb-2">
+              Email
+            </h3>
+            <p className="text-gray-600">
+              support@shopease.com
+            </p>
           </div>
-        </div>
 
-        {/* Contact Form */}
-        <div className="bg-white p-8 rounded-2xl shadow-md border border-purple-100">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-            Send a Message
-          </h2>
+          {/* Phone */}
+          <div className="group bg-white/80 backdrop-blur rounded-2xl p-8 shadow-md border border-purple-100 hover:shadow-xl transition">
+            <div className="text-4xl mb-4"></div>
+            <h3 className="text-xl font-semibold text-gray-800 mb-2">
+              Phone
+            </h3>
+            <p className="text-gray-600">
+              +91 98765 43210
+            </p>
+          </div>
 
-          <form className="space-y-5">
-            <input
-              type="text"
-              placeholder="Your Name"
-              className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-            />
+          {/* Location */}
+          <div className="group bg-white/80 backdrop-blur rounded-2xl p-8 shadow-md border border-purple-100 hover:shadow-xl transition">
+            <div className="text-4xl mb-4"></div>
+            <h3 className="text-xl font-semibold text-gray-800 mb-2">
+              Location
+            </h3>
+            <p className="text-gray-600">
+              India
+            </p>
+          </div>
 
-            <input
-              type="email"
-              placeholder="Your Email"
-              className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-            />
-
-            <textarea
-              rows="4"
-              placeholder="Your Message"
-              className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-            ></textarea>
-
-            <button
-              type="submit"
-              className="w-full py-3 bg-purple-600 text-white font-semibold rounded-lg
-                         hover:bg-purple-700 transition"
-            >
-              Send Message
-            </button>
-          </form>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-gray-300 py-6 text-center">
-        <p className="text-sm">
-          © {new Date().getFullYear()} ShopEase. All rights reserved.
-        </p>
-      </footer>
     </div>
   );
 };

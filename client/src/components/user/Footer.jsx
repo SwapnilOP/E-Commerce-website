@@ -51,7 +51,7 @@ const Footer = () => {
 
       {/* Bottom Line */}
       <div className="mt-10 border-t border-purple-700 pt-4 text-center text-sm text-purple-300">
-        © {new Date().getFullYear()} ShopEase. All rights reserved.
+        footer is static as of now
       </div>
     </footer>
   );

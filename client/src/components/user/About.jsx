@@ -85,10 +85,10 @@ const About = () => {
       {/* CTA */}
       <section className="bg-gradient-to-r from-purple-700 to-purple-500 text-white py-16 text-center">
         <h2 className="text-3xl font-semibold">
-          Join Thousands of Happy Shoppers
+          Made With Love By Swapnil
         </h2>
         <p className="mt-4 text-purple-200 max-w-xl mx-auto">
-          Start shopping smarter with quality products and unbeatable prices.
+          ( and with little efforts too )
         </p>
 
         <Link
