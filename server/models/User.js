@@ -26,7 +26,12 @@ const userSchema = new mongoose.Schema(
       city: { type: String, trim: true },
       pincode: { type: String, trim: true },
       landmark: { type: String, trim: true },
-    }
+    },
+    role: {
+      type: String,
+      enum: ["user", "admin"],
+      default: "user",
+    },
   },
   { timestamps: true }
 );

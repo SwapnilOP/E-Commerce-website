@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {jwtDecode} from "jwt-decode";
 import { Link,useNavigate} from "react-router-dom";
 import { FaSearch, FaShoppingCart, FaBars, FaTimes } from "react-icons/fa";
 
@@ -38,6 +39,9 @@ const NavBar = () => {
           <li><Link to="/contact" className="hover:text-indigo-600 transition">Contact</Link></li>
           {!token && (
             <li><Link to="/login" className="hover:text-indigo-600 transition ">Login</Link></li>
+          )}
+          { jwtDecode(token).role==="admin" &&(
+            <li><Link to="/admin" className="hover:text-indigo-600 transition">Admin panel</Link></li>
           )}
           {token && (
               <button 
@@ -126,6 +130,9 @@ const NavBar = () => {
           <Link to="/contact" className="block hover:text-indigo-600 transition">Contact</Link>
           {!token && (
             <Link to="/login" className="hover:text-indigo-600 transition cursor-pointer">Login</Link>
+          )}
+          { jwtDecode(token).role==="admin" &&(
+            <li><Link to="/admin" className="hover:text-indigo-600 transition">Admin panel</Link></li>
           )}
           {token && (
               <button 

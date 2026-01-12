@@ -21,11 +21,12 @@ export const userLogin = async (req, res) => {
 
     res.status(200).json({
       message: "Login successful",
-      token:generateToken(user._id),
+      token:generateToken(user._id,user.role),
       user: {
         id: user._id,
         name: user.name,
         email: user.email,
+        role: user.role,
       },
     });
 
@@ -55,11 +56,12 @@ export const userSignup = async (req, res) => {
     res.status(201).json(
       {
         message:"User registered successfully",
-        token: generateToken(user._id),
+        token: generateToken(user._id,user.role),
         user:{
           id:user._id,
           name:user.name,
           email:user.email,
+          role:user.role,
         },
       }
     )

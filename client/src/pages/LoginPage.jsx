@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import NavBar from "../components/user/NavBar";
 import { Link, useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const LoginPage = () => {
   };
 
   const login = async (e) => {
-    e.preventDefault(); // ✅ stop page refresh
+    e.preventDefault();
 
     try {
       const res = await fetch("http://localhost:5000/api/auth/login", {
@@ -39,11 +40,22 @@ const LoginPage = () => {
       }
 
       localStorage.setItem("token", data.token);
-      navigate("/");
+
+      const decoded = jwtDecode(data.token);
+      console.log(decoded.role);
+
+      if (decoded.role === "admin") {
+        console.log("Admin logged in");
+        return navigate("/admin");
+      } else {
+        return navigate("/");
+      }
+
     } catch (err) {
       console.error(err);
     }
   };
+
 
   return (
     <>
