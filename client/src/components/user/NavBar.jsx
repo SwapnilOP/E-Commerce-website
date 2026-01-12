@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import {jwtDecode} from "jwt-decode";
-import { Link,useNavigate} from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+import { Link, useNavigate } from "react-router-dom";
 import { FaSearch, FaShoppingCart, FaBars, FaTimes } from "react-icons/fa";
 
 const NavBar = () => {
@@ -8,6 +8,17 @@ const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [inputVal, setInputVal] = useState("");
+  let user = null;
+
+  if (token) {
+    try {
+      const decoded = jwtDecode(token);
+      user = decoded.role;
+    } catch (err) {
+      console.error("Invalid token");
+      localStorage.removeItem("token");
+    }
+  }
 
   const navigate = useNavigate();
 
@@ -16,10 +27,10 @@ const NavBar = () => {
   };
 
   const handleEnterKey = (e) => {
-     if(e.key==='Enter'){
-        console.log("enter key pressed");
-        navigate(`/search-result?keyword=${inputVal}`);
-     }
+    if (e.key === 'Enter') {
+      console.log("enter key pressed");
+      navigate(`/search-result?keyword=${inputVal}`);
+    }
   }
 
   return (
@@ -40,19 +51,19 @@ const NavBar = () => {
           {!token && (
             <li><Link to="/login" className="hover:text-indigo-600 transition ">Login</Link></li>
           )}
-          { jwtDecode(token).role==="admin" &&(
+          {token && user === "admin" && (
             <li><Link to="/admin" className="hover:text-indigo-600 transition">Admin panel</Link></li>
           )}
           {token && (
-              <button 
-                 className=" px-2 py-0.5 border rounded-lg hover:bg-gray-200 cursor-pointer"
-                 onClick={()=>{
-                    localStorage.removeItem("token");
-                    navigate("/");
-                 }}
-              >
-                logout
-              </button>
+            <button
+              className=" px-2 py-0.5 border rounded-lg hover:bg-gray-200 cursor-pointer"
+              onClick={() => {
+                localStorage.removeItem("token");
+                navigate("/");
+              }}
+            >
+              logout
+            </button>
           )}
         </ul>
 
@@ -82,19 +93,19 @@ const NavBar = () => {
 
           {/* Cart */}
 
-            <button 
-               className="text-gray-700 text-2xl relative hover:text-indigo-600 transition cursor-pointer"
-               onClick={()=>{
-                  const token = localStorage.getItem("token");
-                  if(!token){
-                     navigate("/login");
-                  }else{
-                     navigate("/cart");
-                  }
-               }}
-            >
+          <button
+            className="text-gray-700 text-2xl relative hover:text-indigo-600 transition cursor-pointer"
+            onClick={() => {
+              const token = localStorage.getItem("token");
+              if (!token) {
+                navigate("/login");
+              } else {
+                navigate("/cart");
+              }
+            }}
+          >
             <FaShoppingCart />
-            </button>
+          </button>
 
           {/* Mobile Menu Button */}
           <button
@@ -131,19 +142,19 @@ const NavBar = () => {
           {!token && (
             <Link to="/login" className="hover:text-indigo-600 transition cursor-pointer">Login</Link>
           )}
-          { jwtDecode(token).role==="admin" &&(
+          {token && user === "admin" && (
             <li><Link to="/admin" className="hover:text-indigo-600 transition">Admin panel</Link></li>
           )}
           {token && (
-              <button 
-                 className=" px-2 py-0.5 border rounded-lg hover:bg-gray-200"
-                 onClick={()=>{
-                    localStorage.removeItem("token");
-                    navigate("/");
-                 }}
-              >
-                logout
-              </button>
+            <button
+              className=" px-2 py-0.5 border rounded-lg hover:bg-gray-200"
+              onClick={() => {
+                localStorage.removeItem("token");
+                navigate("/");
+              }}
+            >
+              logout
+            </button>
           )}
         </div>
       )}

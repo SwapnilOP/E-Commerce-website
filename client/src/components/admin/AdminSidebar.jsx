@@ -45,6 +45,20 @@ const AdminSidebar = () => {
         </NavLink>
 
         <NavLink
+          to="/admin/Addproducts"
+          className={({ isActive }) =>
+            `${linkBase} ${
+              isActive
+                ? "bg-indigo-100 text-indigo-700"
+                : "hover:bg-gray-100"
+            }`
+          }
+        >
+          <FaBox />
+          Add Products
+        </NavLink>
+
+        <NavLink
           to="/admin/orders"
           className={({ isActive }) =>
             `${linkBase} ${

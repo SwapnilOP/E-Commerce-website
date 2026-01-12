@@ -5,6 +5,28 @@ import StatusBadge from "../../components/admin/StatusBadge";
 const Orders = () => {
   const [orders, setOrders] = useState([]);
 
+  const handleChange = async (orderId, newStatus) => {
+    setOrders((prev) =>
+      prev.map((o) =>
+        o._id === orderId ? { ...o, status: newStatus } : o
+      )
+    );
+    try {
+      console.log("Updating order status:", orderId, newStatus);
+      await fetch(`http://localhost:5000/api/admin/update-status/${orderId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({ status: newStatus }),
+      });
+      console.log("Order status updated successfully");
+    } catch (err) {
+      console.error("Error updating order status:", err);
+    }
+  };
+
   useEffect(() => {
     const fetchOrders = async () => {
       try {
@@ -12,7 +34,6 @@ const Orders = () => {
           "http://localhost:5000/api/admin/info?infoType=orders",
           {
             headers: {
-              "Content-Type": "application/json",
               Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
           }
@@ -58,23 +79,16 @@ const Orders = () => {
         renderActions={(order) => (
           <select
             value={order.status}
-            onChange={(e) => {
-              const newStatus = e.target.value;
-              setOrders((prev) =>
-                prev.map((o) =>
-                  o._id === order._id
-                    ? { ...o, status: newStatus }
-                    : o
-                )
-              );
-            }}
+            onChange={(e) =>
+              handleChange(order._id, e.target.value)
+            }
             className="border rounded-lg px-2 py-1 text-sm"
           >
-            <option>Pending</option>
-            <option>Processing</option>
-            <option>Shipped</option>
-            <option>Delivered</option>
-            <option>Cancelled</option>
+            <option value="Pending">Pending</option>
+            <option value="Processing">Processing</option>
+            <option value="Shipped">Shipped</option>
+            <option value="Delivered">Delivered</option>
+            <option value="Cancelled">Cancelled</option>
           </select>
         )}
       />

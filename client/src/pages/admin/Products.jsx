@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import AdminTable from "../../components/admin/AdminTable";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
+
+  const handelEdit = (productId) => {
+    navigate(`/admin/edit/${productId}`);
+  }
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -50,12 +56,16 @@ const Products = () => {
       <AdminTable
         columns={columns}
         data={products}
-        renderActions={() => (
-          <button className="text-indigo-600 hover:underline text-sm">
+        renderActions={(product) => (
+          <button
+            className="text-indigo-600 hover:underline text-sm"
+            onClick={() => handelEdit(product._id)}
+          >
             Edit
           </button>
         )}
       />
+
     </div>
   );
 };
