@@ -13,11 +13,11 @@ const EditProduct = () => {
 
   const [loading, setLoading] = useState(true);
 
- 
+
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        
+
         const res = await fetch(`http://localhost:5000/api/admin/products/${id}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -115,6 +115,7 @@ const EditProduct = () => {
           >
             Cancel
           </button>
+
         </div>
       </form>
     </div>

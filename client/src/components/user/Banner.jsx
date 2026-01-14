@@ -14,9 +14,10 @@ const Banner = () => {
           "http://localhost:5000/api/banner/fetch?count=5"
         );
         const data = await res.json();
+        console.log("BANNERS API RESPONSE:", data);
         setBanners(data);
       } catch (err) {
-        console.error(err);
+        console.error("Failed to fetch banners:", err);
       }
     };
 
@@ -34,15 +35,17 @@ const Banner = () => {
             delay: 3000,
             disableOnInteraction: false
           }}
-          loop={true}
+          loop
           slidesPerView={1}
+          autoHeight={true}   // ⭐ KEY FIX
         >
           {banners.map((banner) => (
             <SwiperSlide key={banner._id}>
               <img
                 src={banner.image}
-                alt={banner.title}
-                className="w-full h-[400px] object-cover"
+                alt={banner.title || "banner"}
+                className="w-full h-auto block"
+                loading="lazy"
               />
             </SwiperSlide>
           ))}

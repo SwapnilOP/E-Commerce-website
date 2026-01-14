@@ -14,7 +14,8 @@ export const fetchProducts = async (req, res) => {
 
     const totalProducts = await Product.countDocuments();
     const totalPages = Math.ceil(totalProducts / limit);
-
+    
+  
     res.status(200).json({
       products,
       currentPage: page,

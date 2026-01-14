@@ -18,6 +18,7 @@ import Orders from "./pages/admin/Orders";
 import Users from "./pages/admin/Users";
 import EditProduct from "./pages/admin/EditProduct";
 import AddProducts from "./pages/admin/AddProducts";
+import AddBanner from "./pages/admin/AddBanner"
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
             <Route path="users" element={<Users />} />
             <Route path="edit/:id" element={<EditProduct />} />
             <Route path="Addproducts" element={<AddProducts/>}/>
+            <Route path="Addbanners" element={<AddBanner/>}/>
           </Route>
 
         </Routes>

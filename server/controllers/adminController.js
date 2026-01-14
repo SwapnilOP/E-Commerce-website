@@ -1,6 +1,8 @@
 import Order from "../models/Orders.js";
 import Product from "../models/Product.js";
+import Banner from "../models/Banner.js";
 import User from "../models/User.js";
+import slugify from "slugify";
 
 export const getDashboardStats = async (req, res) => {
     try {
@@ -103,17 +105,75 @@ export const updateOrderStatus = async (req, res) => {
 
 export const addProduct = async (req, res) => {
   try {
-    const product = new Product(req.body);
+    const baseSlug = slugify(req.body.name, {
+      lower: true,
+      strict: true,
+    });
+
+    let slug = baseSlug;
+    let count = 1;
+
+    // ensure slug is unique
+    while (await Product.findOne({ slug })) {
+      slug = `${baseSlug}-${count}`;
+      count++;
+    }
+
+    const product = new Product({
+      ...req.body,
+      slug,
+    });
+
     await product.save();
 
     res.status(201).json({
       message: "Product added successfully",
       product,
     });
+
     console.log("Product added:", product);
   } catch (err) {
     console.error("Error adding product:", err);
+    res.status(500).json({ message: err.message });
+  }
+};
+
+export const addBanner = async (req, res) => {
+  try {
+    const {
+      title,
+      image,
+      link,
+      position,
+      isActive,
+      startDate,
+      endDate,
+    } = req.body;
+
+    if (!image) {
+      return res.status(400).json({ message: "Banner image is required" });
+    }
+
+    const banner = new Banner({
+      title,
+      image,
+      link,
+      position,
+      isActive,
+      startDate,
+      endDate,
+    });
+
+    await banner.save();
+
+    res.status(201).json({
+      message: "Banner added successfully",
+      banner,
+    });
+  } catch (err) {
+    console.error("Error adding banner:", err);
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
 

@@ -59,6 +59,20 @@ const AdminSidebar = () => {
         </NavLink>
 
         <NavLink
+          to="/admin/Addbanners"
+          className={({ isActive }) =>
+            `${linkBase} ${
+              isActive
+                ? "bg-indigo-100 text-indigo-700"
+                : "hover:bg-gray-100"
+            }`
+          }
+        >
+          <FaBox />
+          Add Banner
+        </NavLink>
+
+        <NavLink
           to="/admin/orders"
           className={({ isActive }) =>
             `${linkBase} ${
