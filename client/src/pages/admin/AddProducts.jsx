@@ -27,7 +27,7 @@ const AddProducts = () => {
     setUploading(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/upload", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/upload`, {
         method: "POST",
         body: fd,
       });
@@ -53,7 +53,7 @@ const AddProducts = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:5000/api/admin/add-product", {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/add-product`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

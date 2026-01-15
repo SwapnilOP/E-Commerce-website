@@ -10,7 +10,7 @@ const HomePage = () => {
   useEffect(() => {
      const fetchProducts = async()=>{
         try{
-           const res = await fetch("http://localhost:5000/api/products/getProducts?page=1&limit=16");
+           const res = await fetch(`${import.meta.env.VITE_API_URL}/api/products/getProducts?page=1&limit=16`);
            if(!res.ok){
                throw new Error("failed to fetch products");
            }

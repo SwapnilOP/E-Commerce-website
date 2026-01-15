@@ -15,7 +15,7 @@ const Cart = () => {
 
     const fetchCartItems = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/cart/get-cart-items",{
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/cart/get-cart-items`,{
           method: "GET",
           headers: {
             "Content-Type": "application/json",

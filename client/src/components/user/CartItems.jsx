@@ -11,7 +11,7 @@ const CartItems = ({ items, setItems }) => {
   useEffect(() => {
     const checkAdress = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/user/address?operation=isAdded', {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/user/address?operation=isAdded`, {
           method: "POST",
           headers: {
             'Content-Type': 'application/json',
@@ -33,7 +33,7 @@ const CartItems = ({ items, setItems }) => {
 
   const handelDeleteAdress = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/user/address?operation=remove', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/user/address?operation=remove`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
@@ -84,7 +84,7 @@ const CartItems = ({ items, setItems }) => {
 
   const updateQuantity = async (productId, op) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/cart/update/${productId}?operation=${op}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/cart/update/${productId}?operation=${op}`, {
         method: "POST",
         headers: {
           "Authorization": `Bearer ${localStorage.getItem('token')}`,

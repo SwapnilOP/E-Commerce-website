@@ -11,7 +11,7 @@ const Banner = () => {
     const fetchBanners = async () => {
       try {
         const res = await fetch(
-          "http://localhost:5000/api/banner/fetch?count=5"
+          `${import.meta.env.VITE_API_URL}/api/banner/fetch?count=5`
         );
         const data = await res.json();
         console.log("BANNERS API RESPONSE:", data);
@@ -37,7 +37,7 @@ const Banner = () => {
           }}
           loop
           slidesPerView={1}
-          autoHeight={true}   // ⭐ KEY FIX
+          autoHeight={true} 
         >
           {banners.map((banner) => (
             <SwiperSlide key={banner._id}>

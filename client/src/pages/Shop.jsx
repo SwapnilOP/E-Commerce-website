@@ -16,7 +16,7 @@ const Shop = () => {
         setLoading(true);
 
         const res = await fetch(
-          `http://localhost:5000/api/products/getProducts?page=${currentPage}&limit=${PRODUCTS_PER_PAGE}`
+          `${import.meta.env.VITE_API_URL}/api/products/getProducts?page=${currentPage}&limit=${PRODUCTS_PER_PAGE}`
         );
 
         if (!res.ok) throw new Error("Failed to fetch products");

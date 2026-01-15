@@ -9,7 +9,7 @@ const Users = () => {
     const fetchUsers = async () => {
       try {
         const res = await fetch(
-          "http://localhost:5000/api/admin/info?infoType=users",
+          `${import.meta.env.VITE_API_URL}/api/admin/info?infoType=users`,
           {
             headers: {
               "Content-Type": "application/json",

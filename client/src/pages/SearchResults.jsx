@@ -20,7 +20,7 @@ const SearchResults = () => {
         setLoading(true);
 
         const res = await fetch(
-          `http://localhost:5000/api/products/search?page=${currentPage}&limit=${PRODUCTS_PER_PAGE}&keyword=${keyword}`
+          `${import.meta.env.VITE_API_URL}/api/products/search?page=${currentPage}&limit=${PRODUCTS_PER_PAGE}&keyword=${keyword}`
         );
 
         if (!res.ok) throw new Error("Failed to fetch products");

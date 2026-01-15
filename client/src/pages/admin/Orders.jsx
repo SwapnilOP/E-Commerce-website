@@ -31,7 +31,7 @@ const Orders = () => {
     const fetchOrders = async () => {
       try {
         const res = await fetch(
-          "http://localhost:5000/api/admin/info?infoType=orders",
+          `${import.meta.env.VITE_API_URL}/api/admin/info?infoType=orders`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,

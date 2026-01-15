@@ -14,7 +14,7 @@ const Products = () => {
     const fetchProducts = async () => {
       try {
         const response = await fetch(
-          "http://localhost:5000/api/admin/info?infoType=products",
+          `${import.meta.env.VITE_API_URL}/api/admin/info?infoType=products`,
           {
             headers: {
               "Content-Type": "application/json",

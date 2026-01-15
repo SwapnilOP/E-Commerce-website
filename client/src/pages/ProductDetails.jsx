@@ -17,11 +17,10 @@ const ProductDetails = () => {
   const [cartLoading, setCartLoading] = useState(false);
   const [wishlistLoading, setWishlistLoading] = useState(false);
 
-  /* ================= FETCH PRODUCT DETAILS ================= */
   useEffect(() => {
     const fetchDetails = async () => {
       const res = await fetch(
-        `http://localhost:5000/api/products/productDetails/${id}`
+        `${import.meta.env.VITE_API_URL}/api/products/productDetails/${id}`
       );
       const data = await res.json();
       setProduct(data);
@@ -29,11 +28,10 @@ const ProductDetails = () => {
     fetchDetails();
   }, [id]);
 
-  /* ================= FETCH RECOMMENDED PRODUCTS ================= */
   useEffect(() => {
     const fetchProducts = async () => {
       const res = await fetch(
-        "http://localhost:5000/api/products/getProducts?page=1&limit=8"
+        `${import.meta.env.VITE_API_URL}/api/products/getProducts?page=1&limit=8`
       );
       const data = await res.json();
       setProducts(data.products);
@@ -50,7 +48,7 @@ const ProductDetails = () => {
       try {
         // ---- GET CART ----
         const cartRes = await fetch(
-          "http://localhost:5000/api/cart/cart-items-list",
+          `${import.meta.env.VITE_API_URL}/api/cart/cart-items-list`,
           {
             headers: {
               Authorization: `Bearer ${token}`
@@ -67,7 +65,7 @@ const ProductDetails = () => {
 
         // ---- GET WISHLIST ----
         const wishRes = await fetch(
-          "http://localhost:5000/api/wishlist/get-wishlist-list",
+          `${import.meta.env.VITE_API_URL}/api/wishlist/get-wishlist-list`,
           {
             headers: {
               Authorization: `Bearer ${token}`
@@ -99,8 +97,8 @@ const ProductDetails = () => {
       setCartLoading(true);
 
       const url = isInCart
-        ? "http://localhost:5000/api/cart/remove"
-        : "http://localhost:5000/api/cart/add";
+        ? `${import.meta.env.VITE_API_URL}/api/cart/remove`
+        : `${import.meta.env.VITE_API_URL}/api/cart/add`;
 
       await fetch(url, {
         method: "POST",
@@ -117,7 +115,7 @@ const ProductDetails = () => {
     }
   };
 
-  /* ================= WISHLIST TOGGLE ================= */
+ 
   const handleWishlistToggle = async () => {
     const token = localStorage.getItem("token");
     if (!token) return navigate("/login");
@@ -126,8 +124,8 @@ const ProductDetails = () => {
       setWishlistLoading(true);
 
       const url = isWishlisted
-        ? "http://localhost:5000/api/wishlist/remove"
-        : "http://localhost:5000/api/wishlist/add";
+        ? `${import.meta.env.VITE_API_URL}/api/wishlist/remove`
+        : `${import.meta.env.VITE_API_URL}/api/wishlist/add`;
 
       await fetch(url, {
         method: "POST",

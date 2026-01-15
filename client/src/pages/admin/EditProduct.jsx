@@ -18,7 +18,7 @@ const EditProduct = () => {
     const fetchProduct = async () => {
       try {
 
-        const res = await fetch(`http://localhost:5000/api/admin/products/${id}`, {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/products/${id}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -50,7 +50,7 @@ const EditProduct = () => {
     e.preventDefault();
 
     try {
-      await fetch(`http://localhost:5000/api/admin/products/${id}`, {
+      await fetch(`${import.meta.env.VITE_API_URL}/api/admin/products/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

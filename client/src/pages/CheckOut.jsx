@@ -35,7 +35,7 @@ const CheckOut = () => {
       return;
     }
     const orderRes = await fetch(
-      "http://localhost:5000/api/payment/create-order",
+      `${import.meta.env.VITE_API_URL}/api/payment/create-order`,
       {
         method: 'POST',
         headers: {
@@ -68,7 +68,7 @@ const CheckOut = () => {
 
       handler: async function (response) {
         const verifyRes = await fetch(
-          "http://localhost:5000/api/payment/verify",
+          `${import.meta.env.VITE_API_URL}/api/payment/verify`,
           {
             method: "POST",
             headers: {

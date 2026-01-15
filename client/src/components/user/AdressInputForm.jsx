@@ -26,7 +26,7 @@ const AddressInputForm = ({setIsAdressAdded}) => {
       }
 
       const res = await fetch(
-        'http://localhost:5000/api/user/address?operation=add',
+        `${import.meta.env.VITE_API_URL}/api/user/address?operation=add`,
         {
           method: "POST",
           headers: {
