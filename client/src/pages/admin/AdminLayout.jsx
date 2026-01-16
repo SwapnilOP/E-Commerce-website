@@ -2,7 +2,7 @@ import React from "react";
 import { Outlet, Navigate } from "react-router-dom";
 import {jwtDecode} from "jwt-decode";
 
-import AdminNavbar from "../../components/admin/AdminNavbar";
+import AdminNavbar from "../../components/admin/AdminNavBar";
 import AdminSidebar from "../../components/admin/AdminSidebar";
 
 const AdminLayout = () => {
